@@ -27,22 +27,32 @@ A typical **request** (RESTful GET with API key):
   "... more fields ..."
 }
 
-## Error Handling 
+## Error Handling
 
-{
-  "status_code": 7,
-  "status_message": "Invalid API key: You must be granted a valid key.",
-  "success": false
+When interacting with the MoviesDatabase API, it is important to handle errors gracefully to ensure a smooth user experience. The API uses standard HTTP status codes to indicate the result of a request:
+
+- **200 OK**: The request was successful, and the response contains the expected data.
+- **401 Unauthorized**: Authentication failed. This usually means the API key is missing, invalid, or revoked. Verify your API key and ensure it is included in your requests.
+- **404 Not Found**: The requested resource does not exist. Check the resource ID or endpoint for typos.
+- **429 Too Many Requests**: You have exceeded the API rate limit. Implement retry logic with exponential backoff and pause requests for a certain time before retrying.
+- **5xx Server Errors**: These indicate server-side issues. Retry the request after some delay, and if errors persist, check the API status or contact support.
+
+**Best Practices for Error Handling:**
+
+- Always check the HTTP status code in the API response.
+- Parse and log error messages returned in the response body to aid debugging.
+- Implement retry mechanisms for transient errors (e.g., 429 and 5xx responses).
+- Provide user-friendly messages or fallback content in your application when errors occur.
+
+Example in pseudocode:
+
+```ts
+if (response.status === 429) {
+  // wait exponentially longer before retrying
+} else if (response.status >= 500) {
+  // retry after delay
+} else if (response.status === 401) {
+  // alert about invalid API key
+} else if (response.status === 404) {
+  // notify resource not found
 }
-
----
-
-## Usage Limits and Best Practices
-
-1. Create the project directory `alx-project-0x14`.
-2. Inside it, create **README.md** and paste the structured content above.
-3. Adjust details if you're using a different MoviesDatabase API (e.g., OMDb); just mirror the structure using that API's documentation.
-4. You can later add your own TypeScript interface examples for request/response shapes based on the JSON samples.
-
-Let me know if you'd like help drafting TypeScript interfaces or expanding any section further!
-::contentReference[oaicite:7]{index=7}
