@@ -33,6 +33,11 @@ Example
   }
 }
 
+## Authentication
+To securely access the API, all requests must be authenticated using an API key. This key ensures that only authorized clients can interact with the endpoints. Include your API key in the request headers under the Authorization field. The API expects the key to be sent as a Bearer token.
+
+Authorization: Bearer YOUR_API_KEY_HERE
+
 
 ## Error Handling
 
@@ -44,7 +49,7 @@ When interacting with the MoviesDatabase API, it is important to handle errors g
 - **429 Too Many Requests**: You have exceeded the API rate limit. Implement retry logic with exponential backoff and pause requests for a certain time before retrying.
 - **5xx Server Errors**: These indicate server-side issues. Retry the request after some delay, and if errors persist, check the API status or contact support.
 
-**Best Practices for Error Handling:**
+## Usage Limits and Best Practices
 
 - Always check the HTTP status code in the API response.
 - Parse and log error messages returned in the response body to aid debugging.
