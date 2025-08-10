@@ -15,17 +15,24 @@ Main endpoints include:
 - **GET /configuration** – Base URLs, image sizes, and supported languages :contentReference[oaicite:2]{index=2}
 
 ## Request and Response Format
-A typical **request** (RESTful GET with API key):
-**Response** is JSON, for example:
-```json
+This section describes the typical structure of a request sent to the API and the format of the response object received.
+
+Request Format
+
+Requests to the API are typically sent as HTTP POST or GET requests with a JSON payload. The request object usually contains the necessary parameters or data required by the endpoint.
+
+Example 
+
 {
-  "id": 27205,
-  "title": "Inception",
-  "genres": [{"id":28,"name":"Action"}],
-  "release_date": "2010-07-15",
-  "overview": "...",
-  "... more fields ..."
+  "userId": "12345",
+  "query": "search term",
+  "limit": 10,
+  "filters": {
+    "status": "active",
+    "category": "technology"
+  }
 }
+
 
 ## Error Handling
 
